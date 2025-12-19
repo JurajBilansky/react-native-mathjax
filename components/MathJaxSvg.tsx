@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { View, ViewStyle, TextStyle } from "react-native";
+import { View, type ViewStyle, type TextStyle } from "react-native";
 import { ConvertToComponent } from "./ConvertToComponent";
 
 export const MathJaxSvg = memo(

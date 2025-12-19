@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Text, TextStyle } from "react-native";
+import { Text, type TextStyle } from "react-native";
 import { getAdaptor } from "../lib/liteAdaptor";
 import { cssStringToRNStyle } from "../utils/HTMLStyles";
 import { decode } from "html-entities";
