@@ -22,8 +22,7 @@
   },
   "dependencies": {
     "html-entities": "^2.4.0",
-    "mhchemparser": "^4.2.1",
-    "react-native-svg": "^15.15.1"
+    "mhchemparser": "^4.2.1"
   },
   "homepage": "https://github.com/webyonet/react-native-mathjax-html-to-svg.git",
   "license": "MIT"
