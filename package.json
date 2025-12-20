@@ -21,7 +21,9 @@
     "email": "jurajbilansky@gmail.com"
   },
   "dependencies": {
+    "@mathjax/src": "^4.1.0",
     "html-entities": "^2.4.0",
+    "mathjax": "^4.1.0",
     "mhchemparser": "^4.2.1"
   },
   "homepage": "https://github.com/webyonet/react-native-mathjax-html-to-svg.git",

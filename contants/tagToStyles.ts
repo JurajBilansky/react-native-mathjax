@@ -1,4 +1,6 @@
-export const tagToStyle = {
+import type { TextStyle } from "react-native";
+
+export const tagToStyle: Record<string, Partial<TextStyle>> = {
   u: { textDecorationLine: "underline" },
   ins: { textDecorationLine: "underline" },
   s: { textDecorationLine: "line-through" },

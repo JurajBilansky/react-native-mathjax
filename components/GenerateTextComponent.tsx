@@ -5,6 +5,7 @@ import { cssStringToRNStyle } from "../utils/HTMLStyles";
 import { decode } from "html-entities";
 import { GenerateSvgComponent } from "./GenerateSvgComponent";
 import { tagToStyle } from "../contants/tagToStyles";
+import { type LiteElement } from "../mjs/adaptors/lite/Element";
 
 export const GenerateTextComponent = ({
   fontSize,
@@ -17,7 +18,7 @@ export const GenerateTextComponent = ({
   fontSize: number;
   color: string;
   index: number;
-  item: any; // ak chceš, vieme neskôr sprísniť typ
+  item: LiteElement; // ak chceš, vieme neskôr sprísniť typ
   parentStyle?: TextStyle | null;
   textStyle?: TextStyle;
 }): JSX.Element | null => {
@@ -36,7 +37,7 @@ export const GenerateTextComponent = ({
     }
 
     rnStyle = {
-      ...(tagToStyle[item?.kind] ?? {}),
+      ...(tagToStyle[item?.kind as keyof typeof tagToStyle] ?? {}),
       ...(rnStyle ?? {}),
     };
   }
