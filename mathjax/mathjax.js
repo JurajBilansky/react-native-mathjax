@@ -11,7 +11,7 @@ export const mathjax = {
     },
     handleRetriesFor: handleRetriesFor,
     retryAfter: retryAfter,
-    asyncLoad: null,
-    asyncIsSynchronous: false,
+    asyncLoad: () => Promise.resolve(),
+    asyncIsSynchronous: true,
 };
 //# sourceMappingURL=mathjax.js.map

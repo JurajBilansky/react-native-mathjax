@@ -14,11 +14,18 @@ export function CommonMathJaxNewcmFontMixin(Base) {
             ['-rt-bt', 'normal'],
             ['-ex-md', 'normal'],
             ['-bbold', 'normal'],
+            // TODO: bboldx variants added to prevent "Invalid variant" warnings - they map to bbold font
+            ['-bboldx', 'normal'],
+            ['-bboldx-light', 'normal'],
+            ['-bboldx-bold', 'normal'],
+            // TODO: mhchem variant added for chemistry equations support
+            ['-mhchem', 'normal'],
             ['-upsmall', 'normal'],
             ['-uplarge', 'normal']
         ],
         _a.VariantSmp = Object.assign(Object.assign({}, FontData.VariantSmp), { '-bbold': [120120, 120146, , , 120792] }),
-        _a.defaultCssFonts = Object.assign(Object.assign({}, FontData.defaultCssFonts), { '-size3': ['serif', false, false], '-size4': ['serif', false, false], '-size5': ['serif', false, false], '-size6': ['serif', false, false], '-size7': ['serif', false, false], '-lf-tp': ['serif', false, false], '-rt-bt': ['serif', false, false], '-ex-md': ['serif', false, false], '-bbold': ['serif', false, false], '-upsmall': ['serif', false, false], '-uplarge': ['serif', false, false] }),
+        // TODO: bboldx variants added for compatibility - they use bbold font as fallback
+        _a.defaultCssFonts = Object.assign(Object.assign({}, FontData.defaultCssFonts), { '-size3': ['serif', false, false], '-size4': ['serif', false, false], '-size5': ['serif', false, false], '-size6': ['serif', false, false], '-size7': ['serif', false, false], '-lf-tp': ['serif', false, false], '-rt-bt': ['serif', false, false], '-ex-md': ['serif', false, false], '-bbold': ['serif', false, false], '-bboldx': ['serif', false, false], '-bboldx-light': ['serif', false, false], '-bboldx-bold': ['serif', false, false], '-mhchem': ['serif', false, false], '-upsmall': ['serif', false, false], '-uplarge': ['serif', false, false] }),
         _a.defaultAccentMap = {
             0x005E: '\u02C6',
             0x007E: '\u02DC',

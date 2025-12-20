@@ -45,7 +45,7 @@ export class MathJaxNewcmFont extends Base {
     }
 }
 MathJaxNewcmFont.NAME = 'MathJaxNewcm';
-MathJaxNewcmFont.OPTIONS = Object.assign(Object.assign({}, Base.OPTIONS), { dynamicPrefix: '@mathjax/mathjax-newcm-font/svg/dynamic' });
+MathJaxNewcmFont.OPTIONS = Object.assign(Object.assign({}, Base.OPTIONS), { dynamicPrefix: './svg/dynamic' });
 MathJaxNewcmFont.defaultDelimiters = delimiters;
 MathJaxNewcmFont.defaultChars = {
     'normal': normal,
@@ -77,6 +77,12 @@ MathJaxNewcmFont.defaultChars = {
     '-rt-bt': rtBt,
     '-ex-md': exMd,
     '-bbold': bbold,
+    // TODO: bboldx variants use bbold font as fallback since bboldx-specific fonts don't exist in React Native
+    '-bboldx': bbold,
+    '-bboldx-light': bbold,
+    '-bboldx-bold': bbold,
+    // TODO: mhchem variant uses normal font - chemistry symbols use standard Unicode
+    '-mhchem': normal,
     '-upsmall': upsmall,
     '-uplarge': uplarge,
     'script': script,

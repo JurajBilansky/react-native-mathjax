@@ -5,7 +5,7 @@ export default function RootLayout() {
   return (
     <>
       <Stack>
-        <Stack.Screen name="mathjax-test" options={{ title: 'MathJax Examples' }} />
+        <Stack.Screen name="index" options={{ title: 'MathJax Examples' }} />
       </Stack>
       <StatusBar style="auto" />
     </>

@@ -355,7 +355,11 @@ export class FontData {
             const variant = this.variant[name];
             delete variant.chars[n];
             variant.linked.forEach((link) => delete link[n]);
-            retryAfter(this.loadDynamicFile(char));
+            try {
+                this.loadDynamicFile(char);
+            } catch (e) {
+                // Ignore errors in React Native - font will load on next render
+            }
             return null;
         }
         return char;

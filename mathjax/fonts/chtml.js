@@ -42,7 +42,7 @@ export class MathJaxNewcmFont extends Base {
     }
 }
 MathJaxNewcmFont.NAME = 'MathJaxNewcm';
-MathJaxNewcmFont.OPTIONS = Object.assign(Object.assign({}, Base.OPTIONS), { fontURL: '@mathjax/mathjax-newcm-font/js/chtml/woff2', dynamicPrefix: '@mathjax/mathjax-newcm-font/js/chtml/dynamic' });
+MathJaxNewcmFont.OPTIONS = Object.assign(Object.assign({}, Base.OPTIONS), { dynamicPrefix: './chtml/dynamic' });
 MathJaxNewcmFont.defaultCssFamilyPrefix = 'MJX-NCM-ZERO';
 MathJaxNewcmFont.defaultVariantLetters = {
     'normal': '',
@@ -74,6 +74,12 @@ MathJaxNewcmFont.defaultVariantLetters = {
     '-rt-bt': 'RB',
     '-ex-md': 'EM',
     '-bbold': 'B-a',
+    // TODO: bboldx variants use bbold font as fallback since bboldx-specific fonts don't exist in React Native
+    '-bboldx': 'B-a',
+    '-bboldx-light': 'B-a',
+    '-bboldx-bold': 'B-a',
+    // TODO: mhchem variant uses normal font family
+    '-mhchem': 'N',
     '-upsmall': 'U',
     '-uplarge': 'U-a',
     'script': 'S',
@@ -110,6 +116,12 @@ MathJaxNewcmFont.defaultChars = {
     '-rt-bt': rtBt,
     '-ex-md': exMd,
     '-bbold': bbold,
+    // TODO: bboldx variants use bbold font as fallback since bboldx-specific fonts don't exist in React Native
+    '-bboldx': bbold,
+    '-bboldx-light': bbold,
+    '-bboldx-bold': bbold,
+    // TODO: mhchem variant uses normal font - chemistry symbols use standard Unicode
+    '-mhchem': normal,
     '-upsmall': upsmall,
     '-uplarge': uplarge,
     'script': script,
