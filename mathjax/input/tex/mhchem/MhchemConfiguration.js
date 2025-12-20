@@ -8,7 +8,7 @@ import { mhchemParser } from "mhchemparser/esm/mhchemParser.js";
 import { TEXCLASS } from '../../../core/MmlTree/MmlNode.js';
 export const MhchemUtils = {
     relmo(parser, mchar) {
-        const def = Object.assign({ stretchy: true, texClass: TEXCLASS.REL, mathvariant: '-mhchem' }, (mchar.attributes || {}));
+        const def = Object.assign({ stretchy: true, texClass: TEXCLASS.REL }, (mchar.attributes || {}));
         const node = parser.create('token', 'mo', def, mchar.char);
         parser.Push(node);
     },
@@ -72,20 +72,22 @@ const mhchemMacros = new CommandMap('mhchem', {
     mhchemxLeftrightharpoons: [MhchemMethods.xArrow, 0xe40a, 9, 11],
 });
 const mhchemChars = new CharacterMap('mhchem-chars', MhchemUtils.relmo, {
-    tripledash: ['\uE410', { stretchy: false }],
-    mhchemBondTD: ['\uE411', { stretchy: false }],
-    mhchemBondTDD: ['\uE412', { stretchy: false }],
-    mhchemBondDTD: ['\uE413', { stretchy: false }],
-    mhchemlongleftarrow: '\uE428',
-    mhchemlongrightarrow: '\uE429',
-    mhchemlongleftrightarrow: '\uE42A',
-    mhchemlongrightleftharpoons: '\uE408',
-    mhchemlongRightleftharpoons: '\uE409',
-    mhchemlongLeftrightharpoons: '\uE40A',
-    mhchemlongleftrightarrows: '\uE42B',
-    mhchemrightarrow: '\uE42D',
-    mhchemleftarrow: '\uE42C',
-    mhchemleftrightarrow: '\uE42E',
+    // Bond characters - using standard Unicode equivalents for React Native
+    tripledash: ['\u2261', { stretchy: false }],  // ≡ triple bar
+    mhchemBondTD: ['\u2261', { stretchy: false }],
+    mhchemBondTDD: ['\u2261', { stretchy: false }],
+    mhchemBondDTD: ['\u2261', { stretchy: false }],
+    // Arrow characters - using standard Unicode arrows for React Native compatibility
+    mhchemlongleftarrow: '\u27F5',      // ⟵ long leftwards arrow
+    mhchemlongrightarrow: '\u27F6',     // ⟶ long rightwards arrow
+    mhchemlongleftrightarrow: '\u27F7', // ⟷ long left right arrow
+    mhchemlongrightleftharpoons: '\u21CC', // ⇌ rightwards harpoon over leftwards harpoon
+    mhchemlongRightleftharpoons: '\u21CC',
+    mhchemlongLeftrightharpoons: '\u21CB', // ⇋ leftwards harpoon over rightwards harpoon
+    mhchemlongleftrightarrows: '\u21C4',   // ⇄ rightwards arrow over leftwards arrow
+    mhchemrightarrow: '\u2192',         // → rightwards arrow
+    mhchemleftarrow: '\u2190',          // ← leftwards arrow
+    mhchemleftrightarrow: '\u2194',     // ↔ left right arrow
 });
 export const MhchemConfiguration = Configuration.create('mhchem', {
     [ConfigurationType.HANDLER]: {
