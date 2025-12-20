@@ -1,11 +1,11 @@
-import React, { Fragment } from "react";
+import React, { Fragment, ReactElement } from "react";
 import { Text, type TextStyle } from "react-native";
 import { getAdaptor } from "../lib/liteAdaptor";
 import { cssStringToRNStyle } from "../utils/HTMLStyles";
 import { decode } from "html-entities";
 import { GenerateSvgComponent } from "./GenerateSvgComponent";
 import { tagToStyle } from "../contants/tagToStyles";
-import { type LiteElement } from "../mjs/adaptors/lite/Element";
+import { type LiteElement } from "../mathjax/adaptors/lite/Element";
 
 export const GenerateTextComponent = ({
   fontSize,
@@ -18,10 +18,11 @@ export const GenerateTextComponent = ({
   fontSize: number;
   color: string;
   index: number;
-  item: LiteElement; // ak chceš, vieme neskôr sprísniť typ
+  item: LiteElement;
   parentStyle?: TextStyle | null;
   textStyle?: TextStyle;
-}): JSX.Element | null => {
+  [key: string]: any; // Allow React props like "key"
+}): ReactElement | null => {
   let rnStyle: TextStyle | null = null;
   let text: string | null = null;
   const adaptor = getAdaptor();
@@ -44,6 +45,10 @@ export const GenerateTextComponent = ({
 
   if (item?.kind === "#text") {
     text = decode(adaptor.value(item) || "");
+    // Skip empty text nodes
+    if (!text || text.trim() === "") {
+      return null;
+    }
     rnStyle = parentStyle ?? null;
   } else if (item?.kind === "br") {
     text = "\n\n";
@@ -79,6 +84,7 @@ export const GenerateTextComponent = ({
         />
       ) : item.children?.length ? (
         item.children.map((subItem: any, subIndex: number) => (
+          // @ts-ignore
           <GenerateTextComponent
             key={`sub-${index}-${subIndex}`}
             color={color}

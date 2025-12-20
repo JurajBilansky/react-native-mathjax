@@ -1,74 +1,103 @@
-# React Native component to display mathematics in HTML using MathJax without WebView
+# React Native MathJax HTML to SVG
 
-A react native component used to easily display and handle mathematics (TeX or LaTeX) in html. The library does not use Web View.
+A React Native component for rendering mathematical formulas (TeX/LaTeX) to SVG without WebView. Uses MathJax for high-quality mathematical typesetting.
 
-Only TeX or LaTeX is converted to svg. HTML is converted to native `<Text/>` component
+## Features
+
+- 🚀 No WebView required - pure native rendering
+- 📐 Full TeX/LaTeX support with all packages
+- 🎨 Customizable font size and color
+- 📱 Works with Expo and React Native CLI
+- 💾 Optional font caching for better performance
 
 ## Installation
 
-#### With react-native-cli
+### With React Native CLI
 ```bash
-$ yarn add react-native-mathjax-html-to-svg
+npm install react-native-mathjax-html-to-svg react-native-svg
+cd ios && pod install
 ```
+
+### With Expo
 ```bash
-$ yarn add react-native-svg
-```
-```bash
-$ cd ios && pod install
-```
-#### With expo-cli
-```bash
-$ expo install react-native-mathjax-html-to-svg 
-```
-```bash
-$ expo install react-native-svg
+npx expo install react-native-mathjax-html-to-svg react-native-svg
 ```
 
 ## Usage
-**Attention only accepts in-line mathematics.** [see](http://docs.mathjax.org/en/latest/basic/mathematics.html)
-```jsx
-import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
-...
 
-<MathJaxSvg 
-  fontSize={16}
-  color="red"
-  fontCache={true}
->
-  {'$$4sen(α)cos^2(α/2)$$'}
-</MathJaxSvg>
-```
-## Using TeX or LaTeX with html
+### Basic Example
 ```jsx
 import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
 
-return (
-  ...
-
-<MathJaxSvg 
-  fontSize={16}
-  color="#000000"
-  fontCache={true}
->
-  {`
-    <p>When \\(a \\ne 0\\), there are <u>two solutions</u> to \\(ax^2 + bx + c = 0\\) <span style="color:red;">and</span> they are $$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$</p>
-    <b>In-line Mathematics</b><br/><p>Finally, while display equations look good for a page of samples, the ability to mix math <mark>and text in a paragraph is also important.</mark><br/><b>This expression \\(\\sqrt{3x-1}+(1+x)^2\\) is an <span style="color:red;font-style:italic;">example of an inline equation</span>.</b>As you see, MathJax equations can be used this way as well, without unduly disturbing the <s>spacing between lines</s>.</p>
-  `}
-</MathJaxSvg>
-  ...
-);
+export default function App() {
+  return (
+    <MathJaxSvg fontSize={20} color="#000000">
+      {'$$E = mc^2$$'}
+    </MathJaxSvg>
+  );
+}
 ```
-### Output
-<img width="600" src="https://raw.githubusercontent.com/webyonet/react-native-mathjax-html-to-svg/main/export.png"/>
 
-|  Props            | Default                    | Description                             |
-| ----------------- | -------------------------- | --------------------------------------- |
-|  fontSize         | 14                         | Font size to display formula. Note that it will apply to regular text. Regular text accept inline style if html has inline style        |
-|  color            | "#000000"                  | Color of formula to display. Note that it will apply to regular text. Regular text accept inline style if html has inline style             |
-|  fontCache        | false                      | MathJax will cache font paths on an express-by-expression (each expression has its own cache within the SVG image itself), which makes the SVG self-contained, but still allows for some savings if characters are repeated               |
-|  style            | `{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', flexShrink: 1 } `          | Container style             |
+### Advanced Examples
+```jsx
+// Pythagorean theorem
+<MathJaxSvg fontSize={18} color="blue">
+  {'$$a^2 + b^2 = c^2$$'}
+</MathJaxSvg>
 
+// Quadratic formula
+<MathJaxSvg fontSize={16} color="green">
+  {'$$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$'}
+</MathJaxSvg>
 
-[comment]: <> (## Example)
+// Integral
+<MathJaxSvg fontSize={20} color="red">
+  {'$$\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}$$'}
+</MathJaxSvg>
+```
 
-[comment]: <> ([https://github.com/railsjack/demo-app-for-mathjax]&#40;https://github.com/railsjack/demo-app-for-mathjax&#41;)
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `string` | Required | TeX/LaTeX formula to render (use `$$...$$` for display math) |
+| `fontSize` | `number` | `14` | Font size in pixels |
+| `color` | `string` | `"#000000"` | Text color (hex or named color) |
+| `fontCache` | `boolean` | `false` | Enable MathJax font caching for better performance |
+| `style` | `ViewStyle` | `{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }` | Container style |
+| `textStyle` | `TextStyle` | `undefined` | Text style for non-math content |
+
+## Example App
+
+The repository includes an Expo example app with various mathematical formulas:
+
+```bash
+cd example
+npm install
+npm start
+```
+
+## Supported TeX Packages
+
+All standard TeX/LaTeX packages are supported including:
+- AMS math packages (ams, amscd, amssymb)
+- Physics and chemistry (physics, mhchem)
+- Advanced formatting (color, bbox, cancel)
+- And many more...
+
+## License
+
+MIT
+
+## Development
+
+### Building from source
+```bash
+npm install
+npm run build
+```
+
+The build process:
+1. Compiles TypeScript to JavaScript
+2. Copies MathJax engine files to `dist/`
+3. Includes MathJax NewCM font with proper metrics

@@ -1,6 +1,6 @@
-import "../mjs/util/entities/all.js";
-import { liteAdaptor } from "../mjs/adaptors/liteAdaptor.js";
-import { RegisterHTMLHandler } from "../mjs/handlers/html.js";
+import "../mathjax/util/entities/all.js";
+import { liteAdaptor } from "../mathjax/adaptors/liteAdaptor.js";
+import { RegisterHTMLHandler } from "../mathjax/handlers/html.js";
 
 type LiteAdaptorInstance = ReturnType<typeof liteAdaptor>;
 

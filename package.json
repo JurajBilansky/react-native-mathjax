@@ -6,7 +6,21 @@
     "type": "git",
     "url": "git@github.com:webyonet/react-native-mathjax-html-to-svg.git"
   },
-  "main": "index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc && npm run copy:mathjax",
+    "copy:mathjax": "cp -r mathjax dist/",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "prepare": "npm run build",
+    "watch": "tsc --watch"
+  },
   "keywords": [
     "react-native",
     "react-native-mathjax",
@@ -21,11 +35,12 @@
     "email": "jurajbilansky@gmail.com"
   },
   "dependencies": {
-    "@mathjax/src": "^4.1.0",
     "html-entities": "^2.4.0",
-    "mathjax": "^4.1.0",
     "mhchemparser": "^4.2.1",
     "speech-rule-engine": "^5.0.0-beta.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
   },
   "homepage": "https://github.com/webyonet/react-native-mathjax-html-to-svg.git",
   "license": "MIT"

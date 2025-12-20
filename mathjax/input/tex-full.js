@@ -1,0 +1,45 @@
+// Import all TeX packages to register them with ConfigurationHandler
+import './tex/base/BaseConfiguration.js';
+import './tex/action/ActionConfiguration.js';
+import './tex/ams/AmsConfiguration.js';
+import './tex/amscd/AmsCdConfiguration.js';
+import './tex/autoload/AutoloadConfiguration.js';
+import './tex/bbm/BbmConfiguration.js';
+import './tex/bboldx/BboldxConfiguration.js';
+import './tex/bbox/BboxConfiguration.js';
+import './tex/begingroup/BegingroupConfiguration.js';
+import './tex/boldsymbol/BoldsymbolConfiguration.js';
+import './tex/braket/BraketConfiguration.js';
+import './tex/bussproofs/BussproofsConfiguration.js';
+import './tex/cancel/CancelConfiguration.js';
+import './tex/cases/CasesConfiguration.js';
+import './tex/centernot/CenternotConfiguration.js';
+import './tex/color/ColorConfiguration.js';
+import './tex/colortbl/ColortblConfiguration.js';
+import './tex/colorv2/ColorV2Configuration.js';
+import './tex/configmacros/ConfigMacrosConfiguration.js';
+import './tex/dsfont/DsfontConfiguration.js';
+import './tex/empheq/EmpheqConfiguration.js';
+import './tex/enclose/EncloseConfiguration.js';
+import './tex/extpfeil/ExtpfeilConfiguration.js';
+import './tex/gensymb/GensymbConfiguration.js';
+import './tex/html/HtmlConfiguration.js';
+import './tex/mathtools/MathtoolsConfiguration.js';
+import './tex/mhchem/MhchemConfiguration.js';
+import './tex/newcommand/NewcommandConfiguration.js';
+import './tex/noerrors/NoErrorsConfiguration.js';
+import './tex/noundefined/NoUndefinedConfiguration.js';
+import './tex/physics/PhysicsConfiguration.js';
+import './tex/require/RequireConfiguration.js';
+import './tex/setoptions/SetOptionsConfiguration.js';
+import './tex/tagformat/TagFormatConfiguration.js';
+import './tex/texhtml/TexHtmlConfiguration.js';
+import './tex/textcomp/TextcompConfiguration.js';
+import './tex/textmacros/TextMacrosConfiguration.js';
+import './tex/unicode/UnicodeConfiguration.js';
+import './tex/units/UnitsConfiguration.js';
+import './tex/upgreek/UpgreekConfiguration.js';
+import './tex/verb/VerbConfiguration.js';
+
+// Export TeX class
+export { TeX } from './tex.js';

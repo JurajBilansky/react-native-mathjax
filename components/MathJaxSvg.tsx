@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, ReactElement } from "react";
 import { View, type ViewStyle, type TextStyle } from "react-native";
 import { ConvertToComponent } from "./ConvertToComponent";
 
@@ -10,7 +10,7 @@ export const MathJaxSvg = memo(
     fontCache?: boolean;
     style?: ViewStyle;
     textStyle?: TextStyle;
-  }): JSX.Element => {
+  }): ReactElement => {
     const textext = props.children || "";
     const fontSize = props.fontSize ? props.fontSize / 2 : 14;
     const color = props.color ? props.color : "black";

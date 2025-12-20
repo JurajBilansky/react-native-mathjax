@@ -56,6 +56,15 @@ fastlane/report.xml
 fastlane/screenshots
 
 node_modules/**/*
+dist/
+*.tgz
+*.log
+
+# Example app
+example/node_modules/
+example/.expo/
+example/.expo-shared/
+example/dist/
 
 # Android
 android/.idea/
