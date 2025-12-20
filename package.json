@@ -24,7 +24,8 @@
     "@mathjax/src": "^4.1.0",
     "html-entities": "^2.4.0",
     "mathjax": "^4.1.0",
-    "mhchemparser": "^4.2.1"
+    "mhchemparser": "^4.2.1",
+    "speech-rule-engine": "^5.0.0-beta.3"
   },
   "homepage": "https://github.com/webyonet/react-native-mathjax-html-to-svg.git",
   "license": "MIT"

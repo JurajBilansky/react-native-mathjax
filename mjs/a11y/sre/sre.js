@@ -1,4 +1,4 @@
-export * from '#sre/common/system.js';
-import { Variables } from '#sre/common/variables.js';
+export * from "speech-rule-engine/js/common/system.js";
+import { Variables } from "speech-rule-engine/js/common/variables.js";
 export const variables = Variables;
 //# sourceMappingURL=sre.js.map

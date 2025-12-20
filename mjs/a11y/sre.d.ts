@@ -1,5 +1,5 @@
-import { parseInput } from '#sre/common/dom_util.js';
-import { addPreference as addPref, fromPreference as fromPref, toPreference as toPref } from '#sre/speech_rules/clearspeak_preference_string.js';
+import { parseInput } from '../../node_modules/speech-rule-engine/js/common/dom_util.js';
+import { addPreference as addPref, fromPreference as fromPref, toPreference as toPref } from '../../node_modules/speech-rule-engine/js/speech_rules/clearspeak_preference_string.js';
 export declare const locales: Map<string, string>;
 export declare const setupEngine: (x: {
     [key: string]: string | boolean;

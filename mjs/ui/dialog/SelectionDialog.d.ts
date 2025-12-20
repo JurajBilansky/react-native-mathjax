@@ -1,6 +1,6 @@
 import { MJContextMenu } from '../menu/MJContextMenu.js';
-import { SelectionOrder, SelectionGrid, SelectionBox } from '#menu/selection_box.js';
-export { SelectionOrder, SelectionGrid } from '#menu/selection_box.js';
+import { SelectionOrder, SelectionGrid, SelectionBox } from '../../../node_modules/mj-context-menu/js/selection_box.js';
+export { SelectionOrder, SelectionGrid } from '../../../node_modules/mj-context-menu/js/selection_box.js';
 export type selection = {
     title: string;
     values: string[];

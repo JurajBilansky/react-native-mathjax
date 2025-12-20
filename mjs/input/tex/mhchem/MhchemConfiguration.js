@@ -4,7 +4,7 @@ import { CommandMap, CharacterMap } from '../TokenMap.js';
 import TexError from '../TexError.js';
 import BaseMethods from '../base/BaseMethods.js';
 import { AmsMethods } from '../ams/AmsMethods.js';
-import { mhchemParser } from '#mhchem/mhchemParser.js';
+import { mhchemParser } from "mhchemparser/esm/mhchemParser.js";
 import { TEXCLASS } from '../../../core/MmlTree/MmlNode.js';
 export const MhchemUtils = {
     relmo(parser, mchar) {

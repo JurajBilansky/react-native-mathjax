@@ -1,8 +1,8 @@
-import { Engine } from '#sre/common/engine.js';
-import { parseInput } from '#sre/common/dom_util.js';
-import { Variables } from '#sre/common/variables.js';
-import { semanticMathmlSync } from '#sre/enrich_mathml/enrich.js';
-import { addPreference as addPref, fromPreference as fromPref, toPreference as toPref, } from '#sre/speech_rules/clearspeak_preference_string.js';
+import { Engine } from "speech-rule-engine/js/common/engine.js";
+import { parseInput } from "speech-rule-engine/js/common/dom_util.js";
+import { Variables } from "speech-rule-engine/js/common/variables.js";
+import { semanticMathmlSync } from "speech-rule-engine/js/enrich_mathml/enrich.js";
+import { addPreference as addPref, fromPreference as fromPref, toPreference as toPref, } from "speech-rule-engine/js/speech_rules/clearspeak_preference_string.js";
 export const locales = Variables.LOCALES;
 export const setupEngine = (x) => {
     return Engine.getInstance().setup(x);

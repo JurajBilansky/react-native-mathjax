@@ -1,6 +1,6 @@
 import { mathjax } from '../../mathjax.js';
 import * as path from 'path';
-import { dirname } from '#source/source.cjs';
+import { dirname } from '../../../components/mjs/source.cjs';
 let root = path.resolve(dirname, '..', '..', 'cjs');
 if (!mathjax.asyncLoad && typeof require !== 'undefined') {
     mathjax.asyncLoad = (name) => {

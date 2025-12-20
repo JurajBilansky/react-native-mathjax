@@ -1,5 +1,5 @@
 import { InfoDialog } from './InfoDialog.js';
-import { SelectionBox, } from '#menu/selection_box.js';
+import { SelectionBox, } from "mj-context-menu/js/selection_box.js";
 export class SelectionDialog extends SelectionBox {
     constructor(title, signature, selections, order, grid, menu) {
         super(title, signature, order, grid);
