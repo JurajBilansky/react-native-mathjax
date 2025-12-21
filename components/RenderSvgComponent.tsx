@@ -3,14 +3,16 @@ import { Text } from "react-native";
 import { SvgFromXml } from "react-native-svg";
 import { applyColor, applyScale, getScale } from "../utils/svgUtils";
 
-export const RenderSvgComponent = ({
-  svg,
-  fontSize,
-  color,
-}: {
+interface RenderSvgProps {
   svg: string;
   fontSize: number;
   color: string;
+}
+
+export const RenderSvgComponent: React.FC<RenderSvgProps> = ({
+  svg,
+  fontSize,
+  color,
 }) => {
   let svgText = svg;
   const [width, height] = getScale(svgText);

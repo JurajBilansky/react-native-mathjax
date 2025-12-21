@@ -1,272 +1,337 @@
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 import { MathJaxSvg } from "react-native-mathjax-html-to-svg";
 
+const mathExamples = [
+  {
+    section: "Basic Math",
+    examples: [
+      {
+        label: "Display mode:",
+        math: "$$E = mc^{2}$$",
+        fontSize: 20,
+        color: "black",
+      },
+      {
+        label: "Inline mode:",
+        math: "The famous equation $E = mc^{2}$ relates energy and mass.",
+        fontSize: 16,
+        color: "black",
+      },
+      {
+        math: "Quadratic formula (inline): $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$",
+        fontSize: 16,
+        color: "#333",
+      },
+      {
+        math: "$$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$",
+        fontSize: 18,
+        color: "#333",
+      },
+    ],
+  },
+  {
+    section: "AMS (Advanced Math)",
+    examples: [
+      {
+        label: "Matrix (display):",
+        math: "$$\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$$",
+        fontSize: 18,
+        color: "#0066cc",
+      },
+      {
+        math: "Matrix inline: $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ in text.",
+        fontSize: 16,
+        color: "#0066cc",
+      },
+      {
+        label: "Cases (display):",
+        math: "$$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$$",
+        fontSize: 18,
+        color: "#0066cc",
+      },
+      {
+        math: "Inline cases: $f(x) = \\begin{cases} 1 & x > 0 \\\\ 0 & x \\leq 0 \\end{cases}$",
+        fontSize: 14,
+        color: "#0066cc",
+      },
+    ],
+  },
+  {
+    section: "Calculus",
+    examples: [
+      {
+        label: "Integral (display):",
+        math: "$$\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}$$",
+        fontSize: 20,
+        color: "#006600",
+      },
+      {
+        math: "Inline integral: $\\int_0^1 x^2 dx = \\frac{1}{3}$",
+        fontSize: 16,
+        color: "#006600",
+      },
+      {
+        label: "Double integral (display):",
+        math: "$$\\iint_D f(x,y)\\,dx\\,dy$$",
+        fontSize: 18,
+        color: "#006600",
+      },
+      {
+        label: "Limit inline natural:",
+        math: "$\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$",
+        fontSize: 16,
+        color: "#006600",
+      },
+      {
+        label: "Limit inline with displaystyle:",
+        math: "$\\displaystyle\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$",
+        fontSize: 16,
+        color: "#006600",
+      },
+      {
+        label: "Limit display:",
+        math: "$$\\lim_{x \\to \\infty} \\frac{1}{x} = 0$$",
+        fontSize: 18,
+        color: "#006600",
+      },
+    ],
+  },
+  {
+    section: "Chemistry (mhchem)",
+    examples: [
+      {
+        label: "Display mode:",
+        math: "$$\\ce{2H2 + O2 -> 2H2O}$$",
+        fontSize: 18,
+        color: "#cc0066",
+      },
+      {
+        math: "Inline chemistry: $\\ce{H2O}$ is water, $\\ce{CO2}$ is carbon dioxide.",
+        fontSize: 16,
+        color: "#cc0066",
+      },
+      {
+        label: "Precipitation (display):",
+        math: "$$\\ce{SO4^2- + Ba^2+ -> BaSO4 v}$$",
+        fontSize: 16,
+        color: "#cc0066",
+      },
+      {
+        math: "Reversible reaction (inline): $\\ce{H2O <=> H+ + OH-}$",
+        fontSize: 14,
+        color: "#cc0066",
+      },
+    ],
+  },
+  {
+    section: "Physics Package",
+    examples: [
+      {
+        label: "Bra-ket (display):",
+        math: "$$\\bra{\\psi}\\ket{\\phi}$$",
+        fontSize: 18,
+        color: "#9900cc",
+      },
+      {
+        math: "Inline bra-ket: $\\braket{\\psi|\\phi}$ represents inner product.",
+        fontSize: 16,
+        color: "#9900cc",
+      },
+      {
+        label: "Derivative (display):",
+        math: "$$\\dv{x}{t} = v$$",
+        fontSize: 18,
+        color: "#9900cc",
+      },
+      {
+        math: "Partial derivative inline: $\\pdv{f}{x}$ and display:",
+        fontSize: 16,
+        color: "#9900cc",
+      },
+      {
+        math: "$$\\pdv[2]{f}{x}$$",
+        fontSize: 18,
+        color: "#9900cc",
+      },
+    ],
+  },
+  {
+    section: "Special Symbols",
+    examples: [
+      {
+        label: "Greek letters (display):",
+        math: "$$\\alpha, \\beta, \\gamma, \\Delta, \\Omega$$",
+        fontSize: 18,
+        color: "#ff6600",
+      },
+      {
+        math: "Inline Greek: Variables $\\alpha$, $\\beta$, and $\\gamma$ are common.",
+        fontSize: 16,
+        color: "#ff6600",
+      },
+      {
+        label: "Set theory (display):",
+        math: "$$\\mathbb{R}, \\mathbb{N}, \\mathbb{Z}, \\mathbb{Q}$$",
+        fontSize: 18,
+        color: "#ff6600",
+      },
+      {
+        math: "Inline sets: $x \\in \\mathbb{R}$ means x is a real number.",
+        fontSize: 16,
+        color: "#ff6600",
+      },
+    ],
+  },
+  {
+    section: "Cancel Package",
+    examples: [
+      {
+        label: "Cancellation (display):",
+        math: "$$\\frac{\\cancel{5}x}{\\cancel{5}} = x$$",
+        fontSize: 20,
+        color: "#cc0000",
+      },
+      {
+        label: "Inline cancel: Simplify",
+        math: "$\\frac{\\cancel{x} + 2\\cancel{x}}{\\cancel{x}} = 3$",
+        fontSize: 16,
+        color: "#cc0000",
+      },
+    ],
+  },
+  {
+    section: "Color Package",
+    examples: [
+      {
+        label: "Colored (display):",
+        math: "$$\\color{red}{x} + \\color{blue}{y} = \\color{green}{z}$$",
+        fontSize: 20,
+        color: "black",
+      },
+      {
+        math: "Inline colors: $\\color{red}{important}$ text in $\\color{blue}{equations}$.",
+        fontSize: 16,
+        color: "black",
+      },
+    ],
+  },
+  {
+    section: "Bold Symbols",
+    examples: [
+      {
+        label: "Bold vectors (display):",
+        math: "$$\\boldsymbol{v} = \\boldsymbol{\\nabla} \\times \\boldsymbol{A}$$",
+        fontSize: 20,
+        color: "black",
+      },
+      {
+        math: "Inline bold: Vector $\\boldsymbol{F} = m\\boldsymbol{a}$",
+        fontSize: 16,
+        color: "black",
+      },
+    ],
+  },
+  {
+    section: "Unicode Package",
+    examples: [
+      {
+        label: "Unicode (display):",
+        math: "$$♠ ♣ ♥ ♦$$",
+        fontSize: 18,
+        color: "black",
+      },
+      {
+        math: "Inline Unicode: Card symbols $♠$ and $♥$",
+        fontSize: 16,
+        color: "black",
+      },
+    ],
+  },
+  {
+    section: "All MathJax Packages Test",
+    examples: [
+      {
+        math: "Einstein showed that $E = mc^2$, where $E$ is energy, $m$ is mass, and $c$ is the speed of light.",
+        fontSize: 16,
+        color: "#0066cc",
+      },
+      {
+        label: "Complex derivative:",
+        math: "$$\\dfrac{\\mathrm{d}}{\\mathrm{d}x}c\\bigm|_{x=a\\text{ text}}\\dfrac{\\mathrm{d}}{\\mathrm{d}x}a\\bigm|_{x=c}$$",
+        fontSize: 18,
+        color: "#9900cc",
+        isBlock: true,
+      },
+    ],
+  },
+  {
+    section: "Alternative Delimiters",
+    examples: [
+      {
+        label: "Standard inline ($):",
+        math: "The equation $x^2 + y^2 = z^2$ is Pythagorean.",
+        fontSize: 16,
+        color: "#000000",
+      },
+      {
+        label: "Alternative inline \\(\\):",
+        math: "The equation \\(x^2 + y^2 = z^2\\) is Pythagorean.",
+        fontSize: 16,
+        color: "#000000",
+      },
+      {
+        label: "Standard display ($$):",
+        math: "$$\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$$",
+        fontSize: 18,
+        color: "#0066cc",
+        isBlock: true,
+      },
+      {
+        label: "Alternative display \\[\\]:",
+        math: "\\[\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}\\]",
+        fontSize: 18,
+        color: "#0066cc",
+        isBlock: true,
+      },
+    ],
+  },
+];
+
 export default function MathJaxTestScreen() {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>MathJax Comprehensive Test</Text>
 
-      {/* Basic Math */}
-      <Text style={styles.sectionTitle}>Basic Math</Text>
+      {mathExamples.map((section, sectionIndex) => (
+        <View key={sectionIndex}>
+          <Text style={styles.sectionTitle}>{section.section}</Text>
 
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Simple equation:</Text>
-        <MathJaxSvg fontSize={20} color="black">
-          {"$$E = mc^{2}$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Pythagorean theorem:</Text>
-        <MathJaxSvg fontSize={20} color="black">
-          {"$$a^2 + b^2 = c^2$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Inline math: The formula </Text>
-        <MathJaxSvg fontSize={16} color="#333">
-          {"$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$"}
-        </MathJaxSvg>
-        <Text style={styles.label}> solves quadratic equations.</Text>
-      </View>
-
-      {/* AMS Package */}
-      <Text style={styles.sectionTitle}>AMS (Advanced Math)</Text>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Matrix:</Text>
-        <MathJaxSvg fontSize={18} color="#0066cc">
-          {"$$\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Align environment:</Text>
-        <MathJaxSvg fontSize={16} color="#0066cc">
-          {"$$\\begin{aligned} x &= 5 \\\\ y &= 10 \\end{aligned}$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Cases:</Text>
-        <MathJaxSvg fontSize={18} color="#0066cc">
-          {
-            "$$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$$"
-          }
-        </MathJaxSvg>
-      </View>
-
-      {/* Integrals and Calculus */}
-      <Text style={styles.sectionTitle}>Calculus</Text>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Integral:</Text>
-        <MathJaxSvg fontSize={20} color="#006600">
-          {"$$\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Double integral with </Text>
-        <MathJaxSvg fontSize={14} color="#006600">
-          {"$\\iint$"}
-        </MathJaxSvg>
-        <Text style={styles.label}> notation:</Text>
-        <MathJaxSvg fontSize={18} color="#006600">
-          {"$$\\iint_D f(x,y)\\,dx\\,dy$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Limit:</Text>
-        <MathJaxSvg fontSize={18} color="#006600">
-          {"$$\\lim_{x \\to \\infty} \\frac{1}{x} = 0$$"}
-        </MathJaxSvg>
-      </View>
-
-      {/* Chemistry - mhchem */}
-      <Text style={styles.sectionTitle}>Chemistry (mhchem)</Text>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Water molecule:</Text>
-        <MathJaxSvg fontSize={20} color="black">
-          {"$$\\ce{H2O}$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Chemical reaction:</Text>
-        <MathJaxSvg fontSize={18} color="#cc0066">
-          {"$$\\ce{2H2 + O2 -> 2H2O}$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Precipitation:</Text>
-        <MathJaxSvg fontSize={16} color="#cc0066">
-          {"$$\\ce{SO4^2- + Ba^2+ -> BaSO4 v}$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>
-          Equilibrium with inline text: The reaction{" "}
-        </Text>
-        <MathJaxSvg fontSize={14} color="#cc0066">
-          {"$\\ce{H2O <=> H+ + OH-}$"}
-        </MathJaxSvg>
-        <Text style={styles.label}> is reversible.</Text>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Complex arrows:</Text>
-        <MathJaxSvg fontSize={16} color="#cc0066">
-          {"$$\\ce{A <-> B <=> C}$$"}
-        </MathJaxSvg>
-      </View>
-
-      {/* Physics */}
-      <Text style={styles.sectionTitle}>Physics Package</Text>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Bra-ket notation:</Text>
-        <MathJaxSvg fontSize={18} color="#9900cc">
-          {"$$\\bra{\\psi}\\ket{\\phi}$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Derivative:</Text>
-        <MathJaxSvg fontSize={18} color="#9900cc">
-          {"$$\\dv{x}{t} = v$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Partial derivative:</Text>
-        <MathJaxSvg fontSize={18} color="#9900cc">
-          {"$$\\pdv{f}{x}$$"}
-        </MathJaxSvg>
-      </View>
-
-      {/* Symbols and Special */}
-      <Text style={styles.sectionTitle}>Special Symbols</Text>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Greek letters:</Text>
-        <MathJaxSvg fontSize={18} color="#ff6600">
-          {"$$\\alpha, \\beta, \\gamma, \\Delta, \\Omega$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Set theory:</Text>
-        <MathJaxSvg fontSize={18} color="#ff6600">
-          {"$$\\mathbb{R}, \\mathbb{N}, \\mathbb{Z}, \\mathbb{Q}$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Relations:</Text>
-        <MathJaxSvg fontSize={18} color="#ff6600">
-          {"$$\\leq, \\geq, \\neq, \\approx, \\equiv$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Arrows:</Text>
-        <MathJaxSvg fontSize={18} color="#ff6600">
-          {"$$\\rightarrow, \\Rightarrow, \\leftrightarrow, \\Leftrightarrow$$"}
-        </MathJaxSvg>
-      </View>
-
-      {/* Cancel Package */}
-      <Text style={styles.sectionTitle}>Cancel Package</Text>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Cancellation:</Text>
-        <MathJaxSvg fontSize={20} color="#cc0000">
-          {"$$\\frac{\\cancel{5}x}{\\cancel{5}} = x$$"}
-        </MathJaxSvg>
-      </View>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Cross out:</Text>
-        <MathJaxSvg fontSize={20} color="#cc0000">
-          {"$$\\bcancel{incorrect}$$"}
-        </MathJaxSvg>
-      </View>
-
-      {/* Color Package */}
-      <Text style={styles.sectionTitle}>Color Package</Text>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Colored text:</Text>
-        <MathJaxSvg fontSize={20} color="black">
-          {"$$\\color{red}{x} + \\color{blue}{y} = \\color{green}{z}$$"}
-        </MathJaxSvg>
-      </View>
-
-      {/* BoldSymbol */}
-      <Text style={styles.sectionTitle}>Bold Symbols</Text>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Bold vectors:</Text>
-        <MathJaxSvg fontSize={20} color="black">
-          {
-            "$$\\boldsymbol{v} = \\boldsymbol{\\nabla} \\times \\boldsymbol{A}$$"
-          }
-        </MathJaxSvg>
-      </View>
-
-      {/* Unicode */}
-      <Text style={styles.sectionTitle}>Unicode Package</Text>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Unicode characters:</Text>
-        <MathJaxSvg fontSize={18} color="black">
-          {"$$♠ ♣ ♥ ♦$$"}
-        </MathJaxSvg>
-      </View>
-
-      {/* Mixed inline/display */}
-      <Text style={styles.sectionTitle}>Mixed Text and Math</Text>
-
-      <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Einstein showed that </Text>
-        <MathJaxSvg fontSize={16} color="#0066cc">
-          {"$E = mc^2$"}
-        </MathJaxSvg>
-        <Text style={styles.label}>, where </Text>
-        <MathJaxSvg fontSize={16} color="#0066cc">
-          {"$E$"}
-        </MathJaxSvg>
-        <Text style={styles.label}> is energy, </Text>
-        <MathJaxSvg fontSize={16} color="#0066cc">
-          {"$m$"}
-        </MathJaxSvg>
-        <Text style={styles.label}> is mass, and </Text>
-        <MathJaxSvg fontSize={16} color="#0066cc">
-          {"$c$"}
-        </MathJaxSvg>
-        <Text style={styles.label}> is the speed of light.</Text>
-      </View>
-      <View
-        style={[
-          styles.exampleContainer,
-          { flexDirection: "column", alignItems: "flex-start" },
-        ]}
-      >
-        <Text style={styles.label}>Complex derivative with annotations:</Text>
-        <View style={{ alignSelf: "flex-start" }}>
-          <MathJaxSvg fontSize={18} color="#9900cc" style={{ marginTop: 5 }}>
-            {
-              "$$\\dfrac{\\mathrm{d}}{\\mathrm{d}x}c\\bigm|_{x=a\\text{ text}}\\dfrac{\\mathrm{d}}{\\mathrm{d}x}a\\bigm|_{x=c}$$"
-            }
-          </MathJaxSvg>
+          {section.examples.map((example, exampleIndex) => (
+            <View
+              key={exampleIndex}
+              style={[
+                styles.exampleContainer,
+                example.isBlock && {
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                },
+              ]}
+            >
+              {example.label && (
+                <Text style={styles.label}>{example.label}</Text>
+              )}
+              <MathJaxSvg
+                fontSize={example.fontSize}
+                color={example.color}
+                style={example.isBlock ? { marginTop: 5 } : undefined}
+              >
+                {example.math}
+              </MathJaxSvg>
+            </View>
+          ))}
         </View>
-      </View>
+      ))}
+
       <View style={{ height: 50 }} />
     </ScrollView>
   );

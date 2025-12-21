@@ -7,21 +7,22 @@ import { GenerateSvgComponent } from "./GenerateSvgComponent";
 import { tagToStyle } from "../contants/tagToStyles";
 import { type LiteElement } from "../mathjax/adaptors/lite/Element";
 
-export const GenerateTextComponent = ({
-  fontSize,
-  color,
-  index,
-  item,
-  parentStyle = null,
-  textStyle,
-}: {
+interface GenerateTextProps {
   fontSize: number;
   color: string;
   index: number;
   item: LiteElement;
   parentStyle?: TextStyle | null;
   textStyle?: TextStyle;
-  [key: string]: any; // Allow React props like "key"
+}
+
+export const GenerateTextComponent: React.FC<GenerateTextProps> = ({
+  fontSize,
+  color,
+  index,
+  item,
+  parentStyle = null,
+  textStyle,
 }): ReactElement | null => {
   let rnStyle: TextStyle | null = null;
   let text: string | null = null;
@@ -92,6 +93,7 @@ export const GenerateTextComponent = ({
             item={subItem}
             index={subIndex}
             parentStyle={rnStyle ?? undefined}
+            textStyle={textStyle}
           />
         ))
       ) : null}
