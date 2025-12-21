@@ -10,6 +10,8 @@ export const MathJaxSvg = memo(
     fontCache?: boolean;
     style?: ViewStyle;
     textStyle?: TextStyle;
+    macros?: Record<string, string | [string, number]>;
+    TextComponent?: React.ComponentType<any>;
   }): ReactElement => {
     const textext = props.children || "";
     const fontSize = props.fontSize ? props.fontSize / 2 : 14;
@@ -36,6 +38,8 @@ export const MathJaxSvg = memo(
             color={color}
             texString={textext}
             fontCache={fontCache}
+            macros={props.macros}
+            TextComponent={props.TextComponent}
           />
         ) : null}
       </View>

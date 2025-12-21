@@ -14,6 +14,7 @@ interface GenerateTextProps {
   item: LiteElement;
   parentStyle?: TextStyle | null;
   textStyle?: TextStyle;
+  TextComponent?: React.ComponentType<any>;
 }
 
 export const GenerateTextComponent: React.FC<GenerateTextProps> = ({
@@ -23,6 +24,7 @@ export const GenerateTextComponent: React.FC<GenerateTextProps> = ({
   item,
   parentStyle = null,
   textStyle,
+  TextComponent,
 }): ReactElement | null => {
   let rnStyle: TextStyle | null = null;
   let text: string | null = null;
@@ -60,10 +62,12 @@ export const GenerateTextComponent: React.FC<GenerateTextProps> = ({
     } as TextStyle;
   }
 
+  const TextComp = TextComponent || Text;
+
   return (
     <Fragment>
       {text ? (
-        <Text
+        <TextComp
           key={`sub-${index}`}
           style={[
             {
@@ -75,7 +79,7 @@ export const GenerateTextComponent: React.FC<GenerateTextProps> = ({
           ]}
         >
           {text}
-        </Text>
+        </TextComp>
       ) : item?.kind === "mjx-container" ? (
         <GenerateSvgComponent
           key={`sub-${index}`}
@@ -85,7 +89,6 @@ export const GenerateTextComponent: React.FC<GenerateTextProps> = ({
         />
       ) : item.children?.length ? (
         item.children.map((subItem: any, subIndex: number) => (
-          // @ts-ignore
           <GenerateTextComponent
             key={`sub-${index}-${subIndex}`}
             color={color}
@@ -94,6 +97,7 @@ export const GenerateTextComponent: React.FC<GenerateTextProps> = ({
             index={subIndex}
             parentStyle={rnStyle ?? undefined}
             textStyle={textStyle}
+            TextComponent={TextComponent}
           />
         ))
       ) : null}

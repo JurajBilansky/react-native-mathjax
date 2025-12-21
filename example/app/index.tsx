@@ -1,7 +1,20 @@
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 import { MathJaxSvg } from "react-native-mathjax-html-to-svg";
 
-const mathExamples = [
+interface MathExample {
+  label?: string;
+  math: string;
+  fontSize: number;
+  color: string;
+  isBlock?: boolean;
+}
+
+interface MathSection {
+  section: string;
+  examples: MathExample[];
+}
+
+const mathExamples: MathSection[] = [
   {
     section: "Basic Math",
     examples: [
@@ -248,6 +261,29 @@ const mathExamples = [
     ],
   },
   {
+    section: "Complex Inline Math Test",
+    examples: [
+      {
+        label: "Complex mathematical text:",
+        math: "When calculating the limit $\\lim_{n \\to \\infty} \\left(1 + \\frac{1}{n}\\right)^n = e$ we find that Euler's number is approximately $e \\approx 2.718$, and the integral $\\int_{1}^{e} \\frac{1}{x} dx = 1$ has this value. The derivative of function $f(x) = x^2$ is $f'(x) = 2x$, which we can see from the graph where the tangent has slope $m = \\frac{\\Delta y}{\\Delta x}$. For solving the quadratic equation $ax^2 + bx + c = 0$ we use the formula $x_{1,2} = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$, where the discriminant $D = b^2 - 4ac$ determines the number of real solutions.",
+        fontSize: 15,
+        color: "#333",
+      },
+      {
+        label: "Physics text:",
+        math: "In mechanics we know Newton's law $\\vec{F} = m\\vec{a}$, where force is a vector quantity. Kinetic energy is given by formula $E_k = \\frac{1}{2}mv^2$ and potential energy in gravitational field is $E_p = mgh$. For oscillatory motion we have $x(t) = A\\sin(\\omega t + \\varphi)$ with angular frequency $\\omega = 2\\pi f$. Power is defined as $P = \\frac{W}{t}$ and for resistance Ohm's law applies $U = RI$ with power $P = UI = \\frac{U^2}{R}$.",
+        fontSize: 15,
+        color: "#1a5490",
+      },
+      {
+        label: "Probability and statistics:",
+        math: "The binomial distribution is given by formula $P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}$, where $\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$ is the binomial coefficient. The expected value of a random variable is $E(X) = \\sum_{i=1}^{n} x_i p_i$ and variance $\\text{Var}(X) = E(X^2) - [E(X)]^2$. For normal distribution with density $f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$ it holds that $P(\\mu - \\sigma \\leq X \\leq \\mu + \\sigma) \\approx 0.68$.",
+        fontSize: 15,
+        color: "#7b2d89",
+      },
+    ],
+  },
+  {
     section: "All MathJax Packages Test",
     examples: [
       {
@@ -257,7 +293,7 @@ const mathExamples = [
       },
       {
         label: "Complex derivative:",
-        math: "$$\\dfrac{\\mathrm{d}}{\\mathrm{d}x}c\\bigm|_{x=a\\text{ text}}\\dfrac{\\mathrm{d}}{\\mathrm{d}x}a\\bigm|_{x=c}$$",
+        math: "$\\dfrac{\\mathrm{d}}{\\mathrm{d}x}c\\bigm|_{x=a}$ some text $\\dfrac{\\mathrm{d}}{\\mathrm{d}x}a\\bigm|_{x=c}$",
         fontSize: 18,
         color: "#9900cc",
         isBlock: true,

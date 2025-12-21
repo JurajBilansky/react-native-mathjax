@@ -13,12 +13,16 @@ export const ConvertToComponent = ({
   fontCache = false,
   color,
   textStyle,
+  macros,
+  TextComponent,
 }: {
   texString?: string;
   fontSize?: number;
   fontCache?: boolean;
   color: string;
   textStyle?: TextStyle;
+  macros?: Record<string, string | [string, number]>;
+  TextComponent?: React.ComponentType<any>;
 }): React.ReactNode => {
   const adaptor = getAdaptor();
 
@@ -37,6 +41,7 @@ export const ConvertToComponent = ({
       ["\\[", "\\]"],
     ],
     processEscapes: true,
+    macros: macros || {},
   });
 
   const svg = new SVG({
@@ -74,6 +79,7 @@ export const ConvertToComponent = ({
           index={index}
           fontSize={fontSize}
           color={color}
+          TextComponent={TextComponent}
         />
       ))}
     </Fragment>
