@@ -2,47 +2,47 @@ import React, { memo, ReactElement } from "react";
 import { View, type ViewStyle, type TextStyle } from "react-native";
 import { ConvertToComponent } from "./ConvertToComponent";
 
-export const MathJaxSvg = memo(
-  (props: {
-    children?: string;
-    fontSize?: number;
-    color?: string;
-    fontCache?: boolean;
-    style?: ViewStyle;
-    textStyle?: TextStyle;
-    macros?: Record<string, string | [string, number]>;
-    TextComponent?: React.ComponentType<any>;
-  }): ReactElement => {
-    const textext = props.children || "";
-    const fontSize = props.fontSize ? props.fontSize / 2 : 14;
-    const color = props.color ? props.color : "black";
-    const fontCache = props.fontCache;
-    const style = props.style;
+export interface MathJaxSvgProps {
+  children?: string;
+  fontSize?: number;
+  color?: string;
+  fontCache?: boolean;
+  style?: ViewStyle;
+  textStyle?: TextStyle;
+  macros?: Record<string, string | [string, number]>;
+  TextComponent?: React.ComponentType<any>;
+}
 
-    return (
-      <View
-        style={[
-          {
-            flexDirection: "row",
-            flexWrap: "wrap",
-            flexShrink: 1,
-            alignItems: "center",
-          },
-          style,
-        ]}
-      >
-        {textext ? (
-          <ConvertToComponent
-            textStyle={props.textStyle}
-            fontSize={fontSize}
-            color={color}
-            texString={textext}
-            fontCache={fontCache}
-            macros={props.macros}
-            TextComponent={props.TextComponent}
-          />
-        ) : null}
-      </View>
-    );
-  }
-);
+export const MathJaxSvg: React.FC<MathJaxSvgProps> = memo((props) => {
+  const textext = props.children || "";
+  const fontSize = props.fontSize ? props.fontSize / 2 : 14;
+  const color = props.color ? props.color : "black";
+  const fontCache = props.fontCache;
+  const style = props.style;
+
+  return (
+    <View
+      style={[
+        {
+          flexDirection: "row",
+          flexWrap: "wrap",
+          flexShrink: 1,
+          alignItems: "center",
+        },
+        style,
+      ]}
+    >
+      {textext ? (
+        <ConvertToComponent
+          textStyle={props.textStyle}
+          fontSize={fontSize}
+          color={color}
+          texString={textext}
+          fontCache={fontCache}
+          macros={props.macros}
+          TextComponent={props.TextComponent}
+        />
+      ) : null}
+    </View>
+  );
+});
