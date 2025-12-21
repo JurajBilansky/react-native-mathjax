@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { TextStyle } from "react-native";
 import { mathjax } from "../mathjax/mathjax";
-import { TeX } from "../mathjax/input/tex-full.js";
+import { TeX } from "../mathjax/input/tex-full";
 import { SVG } from "../mathjax/output/svg.js";
 import { packageList } from "../utils/getAllMathjaxPackages";
 import { getAdaptor } from "../lib/liteAdaptor";
@@ -41,10 +41,7 @@ export const ConvertToComponent = ({
 
   const svg = new SVG({
     fontCache: fontCache ? "local" : "none",
-    mtextInheritFont: true,
     merrorInheritFont: true,
-    scale: 1,
-    minScale: 0.5,
   });
 
   const html = mathjax.document(texString, {
@@ -70,7 +67,6 @@ export const ConvertToComponent = ({
   return (
     <Fragment>
       {nodes?.map((item: any, index: number) => (
-        // @ts-ignore
         <GenerateTextComponent
           key={index}
           textStyle={textStyle}

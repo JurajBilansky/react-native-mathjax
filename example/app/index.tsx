@@ -8,7 +8,7 @@ export default function MathJaxTestScreen() {
 
       {/* Basic Math */}
       <Text style={styles.sectionTitle}>Basic Math</Text>
-      
+
       <View style={styles.exampleContainer}>
         <Text style={styles.label}>Simple equation:</Text>
         <MathJaxSvg fontSize={20} color="black">
@@ -51,7 +51,9 @@ export default function MathJaxTestScreen() {
       <View style={styles.exampleContainer}>
         <Text style={styles.label}>Cases:</Text>
         <MathJaxSvg fontSize={18} color="#0066cc">
-          {"$$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$$"}
+          {
+            "$$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$$"
+          }
         </MathJaxSvg>
       </View>
 
@@ -108,7 +110,9 @@ export default function MathJaxTestScreen() {
       </View>
 
       <View style={styles.exampleContainer}>
-        <Text style={styles.label}>Equilibrium with inline text: The reaction </Text>
+        <Text style={styles.label}>
+          Equilibrium with inline text: The reaction{" "}
+        </Text>
         <MathJaxSvg fontSize={14} color="#cc0066">
           {"$\\ce{H2O <=> H+ + OH-}$"}
         </MathJaxSvg>
@@ -210,7 +214,9 @@ export default function MathJaxTestScreen() {
       <View style={styles.exampleContainer}>
         <Text style={styles.label}>Bold vectors:</Text>
         <MathJaxSvg fontSize={20} color="black">
-          {"$$\\boldsymbol{v} = \\boldsymbol{\\nabla} \\times \\boldsymbol{A}$$"}
+          {
+            "$$\\boldsymbol{v} = \\boldsymbol{\\nabla} \\times \\boldsymbol{A}$$"
+          }
         </MathJaxSvg>
       </View>
 
@@ -246,8 +252,22 @@ export default function MathJaxTestScreen() {
         </MathJaxSvg>
         <Text style={styles.label}> is the speed of light.</Text>
       </View>
-
-      <View style={{height: 50}} />
+      <View
+        style={[
+          styles.exampleContainer,
+          { flexDirection: "column", alignItems: "flex-start" },
+        ]}
+      >
+        <Text style={styles.label}>Complex derivative with annotations:</Text>
+        <View style={{ alignSelf: "flex-start" }}>
+          <MathJaxSvg fontSize={18} color="#9900cc" style={{ marginTop: 5 }}>
+            {
+              "$$\\dfrac{\\mathrm{d}}{\\mathrm{d}x}c\\bigm|_{x=a\\text{ text}}\\dfrac{\\mathrm{d}}{\\mathrm{d}x}a\\bigm|_{x=c}$$"
+            }
+          </MathJaxSvg>
+        </View>
+      </View>
+      <View style={{ height: 50 }} />
     </ScrollView>
   );
 }
