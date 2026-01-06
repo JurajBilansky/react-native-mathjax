@@ -6,6 +6,10 @@ import { unicodeChars } from '../util/string.js';
 import * as LENGTHS from '../util/lengths.js';
 import { SPACE } from './common/Wrapper.js';
 import { DefaultFont } from './svg/DefaultFont.js';
+
+// Import all dynamic fonts statically for React Native compatibility
+import '../fonts/svg-all-fonts.js';
+
 export const SVGNS = 'http://www.w3.org/2000/svg';
 export const XLINKNS = 'http://www.w3.org/1999/xlink';
 export class SVG extends CommonOutputJax {
